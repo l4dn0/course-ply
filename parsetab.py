@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'ADD AND ASSIGN CONCAT DIV DOT EQ FIELD GT GTE IDENTIFIER IF LBRACE LPAREN LT LTE MUL NEQ NUMBER RBRACE RPAREN SEMICOLON SUB SUBSTRprograms : program\n                | programs programprogram : if_statementif_statement : assignment IF conditionassignment : ASSIGN IDENTIFIER expression SEMICOLONcondition : GT expression expression\n                 | LT expression expression\n                 | GTE expression expression\n                 | LTE expression expression\n                 | EQ expression expression\n                 | NEQ expression expression\n                 | AND condition conditionexpression : NUMBER\n                  | IDENTIFIER\n                  | ADD expression expression\n                  | SUB expression expression\n                  | MUL expression expression\n                  | DIV expression expression\n                  | CONCAT expression expression\n                  | SUBSTR expression expression\n                  | LPAREN expression RPAREN'
-    
-_lr_action_items = {'ASSIGN':([0,1,2,3,6,9,17,19,42,43,44,45,46,47,48,49,50,51,52,53,54,55,],[5,5,-1,-3,-2,-4,-14,-13,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20,-21,]),'$end':([1,2,3,6,9,17,19,42,43,44,45,46,47,48,49,50,51,52,53,54,55,],[0,-1,-3,-2,-4,-14,-13,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20,-21,]),'IF':([4,34,],[7,-5,]),'IDENTIFIER':([5,8,10,11,12,13,14,15,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,49,50,51,52,53,54,55,],[8,17,17,17,17,17,17,17,-14,-13,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,-15,-16,-17,-18,-19,-20,-21,]),'GT':([7,16,17,19,33,42,43,44,45,46,47,48,49,50,51,52,53,54,55,],[10,10,-14,-13,10,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20,-21,]),'LT':([7,16,17,19,33,42,43,44,45,46,47,48,49,50,51,52,53,54,55,],[11,11,-14,-13,11,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20,-21,]),'GTE':([7,16,17,19,33,42,43,44,45,46,47,48,49,50,51,52,53,54,55,],[12,12,-14,-13,12,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20,-21,]),'LTE':([7,16,17,19,33,42,43,44,45,46,47,48,49,50,51,52,53,54,55,],[13,13,-14,-13,13,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20,-21,]),'EQ':([7,16,17,19,33,42,43,44,45,46,47,48,49,50,51,52,53,54,55,],[14,14,-14,-13,14,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20,-21,]),'NEQ':([7,16,17,19,33,42,43,44,45,46,47,48,49,50,51,52,53,54,55,],[15,15,-14,-13,15,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20,-21,]),'AND':([7,16,17,19,33,42,43,44,45,46,47,48,49,50,51,52,53,54,55,],[16,16,-14,-13,16,-6,-7,-8,-9,-10,-11,-12,-15,-16,-17,-18,-19,-20,-21,]),'NUMBER':([8,10,11,12,13,14,15,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,49,50,51,52,53,54,55,],[19,19,19,19,19,19,19,-14,-13,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,-15,-16,-17,-18,-19,-20,-21,]),'ADD':([8,10,11,12,13,14,15,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,49,50,51,52,53,54,55,],[20,20,20,20,20,20,20,-14,-13,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,-15,-16,-17,-18,-19,-20,-21,]),'SUB':([8,10,11,12,13,14,15,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,49,50,51,52,53,54,55,],[21,21,21,21,21,21,21,-14,-13,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,-15,-16,-17,-18,-19,-20,-21,]),'MUL':([8,10,11,12,13,14,15,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,49,50,51,52,53,54,55,],[22,22,22,22,22,22,22,-14,-13,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,-15,-16,-17,-18,-19,-20,-21,]),'DIV':([8,10,11,12,13,14,15,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,49,50,51,52,53,54,55,],[23,23,23,23,23,23,23,-14,-13,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,-15,-16,-17,-18,-19,-20,-21,]),'CONCAT':([8,10,11,12,13,14,15,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,49,50,51,52,53,54,55,],[24,24,24,24,24,24,24,-14,-13,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,-15,-16,-17,-18,-19,-20,-21,]),'SUBSTR':([8,10,11,12,13,14,15,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,49,50,51,52,53,54,55,],[25,25,25,25,25,25,25,-14,-13,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,-15,-16,-17,-18,-19,-20,-21,]),'LPAREN':([8,10,11,12,13,14,15,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,49,50,51,52,53,54,55,],[26,26,26,26,26,26,26,-14,-13,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,-15,-16,-17,-18,-19,-20,-21,]),'SEMICOLON':([17,18,19,49,50,51,52,53,54,55,],[-14,34,-13,-15,-16,-17,-18,-19,-20,-21,]),'RPAREN':([17,19,41,49,50,51,52,53,54,55,],[-14,-13,55,-15,-16,-17,-18,-19,-20,-21,]),}
+_lr_signature = 'leftMINUSleftPOWERASSIGN EQ GT IDENTIFIER LBRACKET LPAREN LT MINUS NEQ NUMBER POWER QUESTION RBRACKET RPAREN SEMICOLON\nprogram : statements\n\nstatements : statement\n           | statements statement\n\nstatement : if_statement SEMICOLON\n\nif_statement : condition QUESTION assign_statement\n\nif_statement : condition QUESTION if_statement\n\nassign_statement : ASSIGN variable expression\n\ncondition : expression EQ expression\n          | expression NEQ expression\n          | expression LT expression\n          | expression GT expression\n\nexpression : expression MINUS expression\n\nexpression : expression POWER\n\nexpression : LPAREN expression RPAREN\n\nexpression : NUMBER\n\nexpression : variable\n\nvariable : IDENTIFIER\n\nvariable : IDENTIFIER LBRACKET NUMBER RBRACKET\n'
+
+_lr_action_items = {'LPAREN':([0,2,3,7,10,11,12,13,14,15,16,17,18,32,33,],[7,7,-2,7,-17,-3,-4,7,7,7,7,7,7,7,-18,]),'NUMBER':([0,2,3,7,10,11,12,13,14,15,16,17,18,21,32,33,],[8,8,-2,8,-17,-3,-4,8,8,8,8,8,8,31,8,-18,]),'IDENTIFIER':([0,2,3,7,10,11,12,13,14,15,16,17,18,24,32,33,],[10,10,-2,10,-17,-3,-4,10,10,10,10,10,10,10,10,-18,]),'$end':([1,2,3,11,12,],[0,-1,-2,-3,-4,]),'SEMICOLON':([4,8,9,10,19,22,23,29,30,33,34,],[12,-15,-16,-17,-13,-5,-6,-12,-14,-18,-7,]),'QUESTION':([5,8,9,10,19,25,26,27,28,29,30,33,],[13,-15,-16,-17,-13,-8,-9,-10,-11,-12,-14,-18,]),'EQ':([6,8,9,10,19,29,30,33,],[14,-15,-16,-17,-13,-12,-14,-18,]),'NEQ':([6,8,9,10,19,29,30,33,],[15,-15,-16,-17,-13,-12,-14,-18,]),'LT':([6,8,9,10,19,29,30,33,],[16,-15,-16,-17,-13,-12,-14,-18,]),'GT':([6,8,9,10,19,29,30,33,],[17,-15,-16,-17,-13,-12,-14,-18,]),'MINUS':([6,8,9,10,19,20,25,26,27,28,29,30,33,34,],[18,-15,-16,-17,-13,18,18,18,18,18,-12,-14,-18,18,]),'POWER':([6,8,9,10,19,20,25,26,27,28,29,30,33,34,],[19,-15,-16,-17,-13,19,19,19,19,19,19,-14,-18,19,]),'RPAREN':([8,9,10,19,20,29,30,33,],[-15,-16,-17,-13,30,-12,-14,-18,]),'LBRACKET':([10,],[21,]),'ASSIGN':([13,],[24,]),'RBRACKET':([31,],[33,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'programs':([0,],[1,]),'program':([0,1,],[2,6,]),'if_statement':([0,1,],[3,3,]),'assignment':([0,1,],[4,4,]),'condition':([7,16,33,],[9,33,48,]),'expression':([8,10,11,12,13,14,15,20,21,22,23,24,25,26,27,28,29,30,31,32,35,36,37,38,39,40,],[18,27,28,29,30,31,32,35,36,37,38,39,40,41,42,43,44,45,46,47,49,50,51,52,53,54,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statements':([0,],[2,]),'statement':([0,2,],[3,11,]),'if_statement':([0,2,13,],[4,4,23,]),'condition':([0,2,13,],[5,5,5,]),'expression':([0,2,7,13,14,15,16,17,18,32,],[6,6,20,6,25,26,27,28,29,34,]),'variable':([0,2,7,13,14,15,16,17,18,24,32,],[9,9,9,9,9,9,9,9,9,32,9,]),'assign_statement':([13,],[22,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,26 +26,23 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> programs","S'",1,None,None,None),
-  ('programs -> program','programs',1,'p_programs','parser.py',32),
-  ('programs -> programs program','programs',2,'p_programs','parser.py',33),
-  ('program -> if_statement','program',1,'p_program','parser.py',40),
-  ('if_statement -> assignment IF condition','if_statement',3,'p_if_statement','parser.py',44),
-  ('assignment -> ASSIGN IDENTIFIER expression SEMICOLON','assignment',4,'p_assignment','parser.py',48),
-  ('condition -> GT expression expression','condition',3,'p_condition','parser.py',52),
-  ('condition -> LT expression expression','condition',3,'p_condition','parser.py',53),
-  ('condition -> GTE expression expression','condition',3,'p_condition','parser.py',54),
-  ('condition -> LTE expression expression','condition',3,'p_condition','parser.py',55),
-  ('condition -> EQ expression expression','condition',3,'p_condition','parser.py',56),
-  ('condition -> NEQ expression expression','condition',3,'p_condition','parser.py',57),
-  ('condition -> AND condition condition','condition',3,'p_condition','parser.py',58),
-  ('expression -> NUMBER','expression',1,'p_expression','parser.py',75),
-  ('expression -> IDENTIFIER','expression',1,'p_expression','parser.py',76),
-  ('expression -> ADD expression expression','expression',3,'p_expression','parser.py',77),
-  ('expression -> SUB expression expression','expression',3,'p_expression','parser.py',78),
-  ('expression -> MUL expression expression','expression',3,'p_expression','parser.py',79),
-  ('expression -> DIV expression expression','expression',3,'p_expression','parser.py',80),
-  ('expression -> CONCAT expression expression','expression',3,'p_expression','parser.py',81),
-  ('expression -> SUBSTR expression expression','expression',3,'p_expression','parser.py',82),
-  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression','parser.py',83),
+  ("S' -> program","S'",1,None,None,None),
+  ('program -> statements','program',1,'p_program','main.py',159),
+  ('statements -> statement','statements',1,'p_statements','main.py',167),
+  ('statements -> statements statement','statements',2,'p_statements','main.py',168),
+  ('statement -> if_statement SEMICOLON','statement',2,'p_statement','main.py',180),
+  ('if_statement -> condition QUESTION assign_statement','if_statement',3,'p_if_statement_assign','main.py',191),
+  ('if_statement -> condition QUESTION if_statement','if_statement',3,'p_if_statement_nested','main.py',199),
+  ('assign_statement -> ASSIGN variable expression','assign_statement',3,'p_assign_statement','main.py',210),
+  ('condition -> expression EQ expression','condition',3,'p_condition','main.py',220),
+  ('condition -> expression NEQ expression','condition',3,'p_condition','main.py',221),
+  ('condition -> expression LT expression','condition',3,'p_condition','main.py',222),
+  ('condition -> expression GT expression','condition',3,'p_condition','main.py',223),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_minus','main.py',234),
+  ('expression -> expression POWER','expression',2,'p_expression_square','main.py',246),
+  ('expression -> LPAREN expression RPAREN','expression',3,'p_expression_group','main.py',254),
+  ('expression -> NUMBER','expression',1,'p_expression_number','main.py',262),
+  ('expression -> variable','expression',1,'p_expression_variable','main.py',270),
+  ('variable -> IDENTIFIER','variable',1,'p_variable_simple','main.py',280),
+  ('variable -> IDENTIFIER LBRACKET NUMBER RBRACKET','variable',4,'p_variable_indexed','main.py',288),
 ]

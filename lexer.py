@@ -1,59 +1,150 @@
 import ply.lex as lex
 
+# =========================================================
+# ЛЕКСЕР
+# =========================================================
+
 tokens = (
-    'IF', 'ADD', 'SUB', 'MUL', 'DIV', 'CONCAT', 'SUBSTR',
-    'EQ', 'NEQ', 'AND', 'GT', 'LT', 'GTE', 'LTE',
-    'NUMBER', 'IDENTIFIER', 'FIELD',
-    'ASSIGN', 'LPAREN', 'RPAREN', 'DOT', 'SEMICOLON', 'LBRACE', 'RBRACE'
+    'ASSIGN',
+
+    'EQ',
+    'NEQ',
+    'LT',
+    'GT',
+
+    'MINUS',
+    'POWER',
+
+    'QUESTION',
+
+    'LPAREN',
+    'RPAREN',
+
+    'LBRACKET',
+    'RBRACKET',
+
+    'SEMICOLON',
+
+    'NUMBER',
+    'IDENTIFIER',
 )
 
-t_ASSIGN    = r'='
-t_LPAREN    = r'\('
-t_RPAREN    = r'\)'
-t_DOT       = r'\.'
-t_SEMICOLON = r';'
-t_LBRACE    = r'\{'
-t_RBRACE    = r'\}'
+# ---------------------------------------------------------
+# Операторы и разделители
+# ---------------------------------------------------------
 
-def t_KEYWORDS(t):
-    r'if|add|sub|mul|div|concat|substr|eq|neq|and|gt|lt|gte|lte'
-    keywords = {
-        'if': 'IF', 
-        'add': 'ADD', 'sub': 'SUB', 'mul': 'MUL', 'div': 'DIV',
-        'concat': 'CONCAT', 'substr': 'SUBSTR',
-        'eq': 'EQ', 'neq': 'NEQ', 'and': 'AND',
-        'gt': 'GT', 'lt': 'LT', 'gte': 'GTE', 'lte': 'LTE',
-    }
-    t.type = keywords.get(t.value, 'IDENTIFIER')
-    return t
+t_ASSIGN = r':='
+
+t_EQ = r'=='
+t_NEQ = r'!='
+t_LT = r'<'
+t_GT = r'>'
+
+t_MINUS = r'-'
+t_POWER = r'\^'
+
+t_QUESTION = r'\?'
+
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
+
+t_LBRACKET = r'\['
+t_RBRACKET = r'\]'
+
+t_SEMICOLON = r';'
+
+# ---------------------------------------------------------
+# Константы
+# ---------------------------------------------------------
 
 MAX_IDENT_LEN = 10
 
-def t_IDENTIFIER(t):
-    r'[a-zA-Z_][a-zA-Z0-9_]*[ ]*'  # значимые символы, затем пробелы
-    t.value = t.value.rstrip()  # убираем пробелы в конце
-    if len(t.value) > MAX_IDENT_LEN:
-        t.value = t.value[:MAX_IDENT_LEN]
-    return t
+# ---------------------------------------------------------
+# Восьмеричные числа
+# ---------------------------------------------------------
 
 def t_NUMBER(t):
-    r'\d+(?:\.\d+)?(?:[eE][+-]?\d+)?'
-    t.value = float(t.value)
+    r'0[0-7]*'
+    t.value = int(t.value, 8)
     return t
 
-t_ignore = ' \t\n'
+# ---------------------------------------------------------
+# Идентификаторы
+# Фиксированная длина
+# Внутри могут быть пробелы
+# ---------------------------------------------------------
+
+def t_IDENTIFIER(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+
+    # удаляем внутренние пробелы
+    name = ''.join(t.value.split())
+
+    # фиксированная длина
+    if len(name) < MAX_IDENT_LEN:
+        name = name.ljust(MAX_IDENT_LEN)
+
+    if len(name) > MAX_IDENT_LEN:
+        name = name[:MAX_IDENT_LEN]
+
+    t.value = name
+
+    return t
+
+# ---------------------------------------------------------
+
+t_ignore = ' \t'
+
+# ---------------------------------------------------------
+
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
+# ---------------------------------------------------------
+
+def t_error(t):
+    print(f"Недопустимый символ '{t.value[0]}'")
+    t.lexer.skip(1)
+
+# ---------------------------------------------------------
 
 lexer = lex.lex()
 
-if __name__ == '__main__':
-    with open('input.txt', 'r', encoding='utf-8') as f:
-        text = f.read()
-    
-    lexer.input(text)
-    
-    for tok in lexer:
-        print(f"LexToken({tok.type}, {tok.value})")
+# =========================================================
+# AST
+# =========================================================
 
-def t_error(t):
-    print(f"Недопустимый символ: {t.value[0]}")
-    t.lexer.skip(1)
+class IfNode:
+    def __init__(self, cond, body):
+        self.cond = cond
+        self.body = body
+
+class AssignNode:
+    def __init__(self, var, expr):
+        self.var = var
+        self.expr = expr
+
+class BinOpNode:
+    def __init__(self, op, left, right=None):
+        self.op = op
+        self.left = left
+        self.right = right
+
+class NumberNode:
+    def __init__(self, value):
+        self.value = value
+
+class VariableNode:
+    def __init__(self, name, index=None):
+        self.name = name
+        self.index = index
+
+# =========================================================
+# ПРИОРИТЕТЫ
+# =========================================================
+
+precedence = (
+    ('left', 'MINUS'),
+    ('left', 'POWER'),
+)
